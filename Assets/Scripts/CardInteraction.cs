@@ -25,10 +25,6 @@ public class CardInteraction : MonoBehaviour {
 	private bool movingCard = false;
 	private Vector3 targetMovePosition;
 
-	void OnBecameInvisible()
-	{
-		print ("INVISIBLE");
-	}
 
 	void OnMouseEnter()
 	{
@@ -62,12 +58,19 @@ public class CardInteraction : MonoBehaviour {
 			if (currentSide == Side.left || currentSide == Side.right)
 			{
 				// Left => currentSide = -1    |    Right => currentSide = 1
-				targetMovePosition = transform.position + transform.right * distanceToMove * ((int)currentSide);
+				//targetMovePosition = transform.position + transform.right * distanceToMove * ((int)currentSide);
+				if (currentSide == Side.left)
+					animation.clip = animation.GetClip ("selectedLeft");
+				else
+					animation.clip = animation.GetClip ("selectedRight");
+
+				animation.Play ();
 			
 				// INSERT FUNCTION HERE TO UPDATE PLAYER STATS (FAME, GOLD,...)
 				// UpdateStats (currentSide)
 
 				cardBehind.FlipCard ();
+				currentSide = Side.none;
 			} 
 		}
 
@@ -94,7 +97,7 @@ public class CardInteraction : MonoBehaviour {
 			transform.rotation = Quaternion.Slerp (transform.rotation, Quaternion.Euler (Vector3.zero), Time.deltaTime * rotationSpeed);
 		else 
 		{
-			transform.position = Vector3.Lerp (transform.position, targetMovePosition, moveSpeed * Time.deltaTime);
+			//transform.position = Vector3.Lerp (transform.position, targetMovePosition, moveSpeed * Time.deltaTime);
 		}
 	}
 

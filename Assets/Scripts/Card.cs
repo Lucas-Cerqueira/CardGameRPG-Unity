@@ -65,6 +65,7 @@ public class Card : MonoBehaviour {
 		decisionsText[1] = newDecisionsText [1];
 	}
 
+	int i = 0;
 	// This function is called while the CardBehind is flipping
 	public void SetupNextCard()
 	{
@@ -74,34 +75,42 @@ public class Card : MonoBehaviour {
 		// SetDescription (newDescription)
 		// ...
 
+
 		//////// DEBUG ////////
-		SetTitle ("Um Sacerdote");
-		SetDescription ("Você tem um tempo para ouvir a palavra do nosso Deus Sol?");
-		SetDecisionsText (new string[2] {"Nao", "Praise the sun!"});
-		SetImage (debugSprite);
+		if (i == 0) 
+		{
+			SetTitle ("Um Ladrao");
+			SetDescription ("Um ladrao te intimida para roubar seu dinheiro, o que você faz?");
+			SetDecisionsText (new string[2] {"Entrega o dinheiro", "Luta"});
+			SetImage (imageObj.transform.GetChild(0).GetComponent<SpriteRenderer> ().sprite);
+			i++;
+		}
+		else
+		{
+			SetTitle ("Um Sacerdote");
+			SetDescription ("Você tem um tempo para ouvir a palavra do nosso Deus Sol?");
+			SetDecisionsText (new string[2] {"Nao", "Praise the sun!"});
+			SetImage (debugSprite);
+		}
+
 		//////////////////////
 
-
-		// Deactivate it now and reactivate it after the card has been flipped
-		DeactivateNextCard();
 		print ("Next card set up");
 	}
 
-	public void DeactivateNextCard()
-	{
-		imageObj.GetComponent<BoxCollider2D> ().enabled = false;
-		//imageObj.transform.GetChild(0).GetComponent<SpriteRenderer> ().enabled = false;
-		print ("Next card deactivated");
-	}
+//	public void DeactivateNextCard()
+//	{
+//		imageObj.GetComponent<BoxCollider2D> ().enabled = false;
+//		//imageObj.transform.GetChild(0).GetComponent<SpriteRenderer> ().enabled = false;
+//		print ("Next card deactivated");
+//	}
 
 	// This function is called after the CardBehind has flipped
 	public void ActivateNextCard()
 	{
-		imageObj.transform.position = imageStartPosition;
-		imageObj.transform.rotation = Quaternion.identity;
 		imageObj.GetComponent<BoxCollider2D> ().enabled = true;
 		imageObj.transform.GetChild(0).GetComponent<SpriteRenderer> ().sprite = image;
-		//imageObj.transform.GetChild(0).GetComponent<SpriteRenderer> ().enabled = true;
+		imageObj.transform.GetChild(0).GetComponent<SpriteRenderer> ().enabled = true;
 		print ("Next card activated");
 	}
 
@@ -114,11 +123,6 @@ public class Card : MonoBehaviour {
 		decisionObj = GameObject.Find ("CardDecision");
 
 		imageStartPosition = imageObj.transform.position;
-
-
-		//////// DEBUG ////////
-		SetDecisionsText (new string[2] {"Entrega o dinheiro", "Luta"});
-		//////////////////////
 	}
 	
 	// Update is called once per frame
