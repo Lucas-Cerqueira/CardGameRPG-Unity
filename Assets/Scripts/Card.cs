@@ -5,6 +5,9 @@ using TMPro;
 
 public class Card : MonoBehaviour {
 
+	public enum Side
+	{none=-1, left=0, right=1}
+
 	public Sprite debugSprite;
 
 	// Class attributes
@@ -112,6 +115,11 @@ public class Card : MonoBehaviour {
 		imageObj.transform.GetChild(0).GetComponent<SpriteRenderer> ().sprite = image;
 		imageObj.transform.GetChild(0).GetComponent<SpriteRenderer> ().enabled = true;
 		print ("Next card activated");
+	}
+
+	public void UpdatePlayerStats (Side side)
+	{
+		// INSERT CODE TO UPDATE PLAYER STATS BASED ON SIDE
 	}
 
 	// Use this for initialization

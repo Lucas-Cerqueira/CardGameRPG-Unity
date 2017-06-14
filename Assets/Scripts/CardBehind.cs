@@ -22,11 +22,8 @@ public class CardBehind : MonoBehaviour {
 
 	// Change CardBehind image, but it is just an image
 	// The real card will be activated later
-	public void ChangeBehindCardImage ()
+	public void ChangeCardBehindImage ()
 	{
-		CardInteraction.currentSide = CardInteraction.Side.none;
-
-
 		Sprite cardSprite = cardClass.GetImage ();
 		if (cardSprite)
 			spriteRenderer.sprite = cardSprite;

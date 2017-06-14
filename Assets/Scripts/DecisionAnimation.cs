@@ -9,8 +9,8 @@ public class DecisionAnimation : MonoBehaviour {
 
 	private TMPro.TMP_Text decisionText;
 
-	private CardInteraction.Side previousValue = CardInteraction.Side.none;
-	private CardInteraction.Side currentValue = CardInteraction.Side.none;
+	private Card.Side previousValue = Card.Side.none;
+	private Card.Side currentValue = Card.Side.none;
 
 	private Card cardClass;
 
@@ -31,11 +31,11 @@ public class DecisionAnimation : MonoBehaviour {
 		{
 			string [] decisionsText = cardClass.GetDecisionsText();
 			animation.clip = animation.GetClip ("showDecision");
-			if (currentValue == CardInteraction.Side.none) 
+			if (currentValue == Card.Side.none) 
 			{
 				animation.clip = animation.GetClip ("hideDecision");
 			}
-			else if (currentValue == CardInteraction.Side.left) 
+			else if (currentValue == Card.Side.left) 
 			{
 				decisionText.SetText ((cardClass.GetDecisionsText())[0]);
 			}
